@@ -9,7 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -19,31 +22,31 @@ import javax.persistence.ManyToOne;
 @Table(name = "Profesor")
 public class Profesor  implements Serializable {
 
-    @Id
+    @Id@GeneratedValue(strategy =GenerationType.IDENTITY )
     @Column(name = "idProfesor")
-     private int idProfesor;
-    @Column(name = "pIdUsuario")     
+     private int idProfesor;   
     @ManyToOne(fetch = FetchType.LAZY)
-     private Usuario pIdUsuario;
+    @JoinColumn(name = "username")
+     private Usuario username;
     @Column(name = "contratado")     
      private boolean contratado;
-    @OneToMany(mappedBy = "hIdProfesor")    
+    @OneToMany(mappedBy = "idProfesor")    
      private List<Horario> horario =  new ArrayList<>();
-    @OneToMany(mappedBy = "aIdProfesor")     
+    @OneToMany(mappedBy = "idProfesor")     
      private List<Asesorar> asesorar =  new ArrayList<>();
 
     public Profesor() {
     }
 
 	
-    public Profesor(int idProfesor, Usuario pIdUsuario, boolean contratado) {
+    public Profesor(int idProfesor, Usuario username, boolean contratado) {
         this.idProfesor = idProfesor;
-        this.pIdUsuario = pIdUsuario;
+        this.username = username;
         this.contratado = contratado;
     }
-    public Profesor(int idProfesor, Usuario pIdUsuario, boolean contratado, List<Horario> horario, List<Asesorar> asesorar) {
+    public Profesor(int idProfesor, Usuario username, boolean contratado, List<Horario> horario, List<Asesorar> asesorar) {
        this.idProfesor = idProfesor;
-       this.pIdUsuario = pIdUsuario;
+       this.username = username;
        this.contratado = contratado;
        this.horario = horario;
        this.asesorar = asesorar;
@@ -57,11 +60,11 @@ public class Profesor  implements Serializable {
         this.idProfesor = idProfesor;
     }
     public Usuario getUsuario() {
-        return this.pIdUsuario;
+        return this.username;
     }
     
-    public void setUsuario(Usuario pIdUsuario) {
-        this.pIdUsuario = pIdUsuario;
+    public void setUsuario(Usuario username) {
+        this.username = username;
     }
     public boolean getContratado() {
         return this.contratado;

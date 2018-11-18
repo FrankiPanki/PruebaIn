@@ -2,13 +2,15 @@ package modelo;
 // Generated 2/10/2018 03:11:32 PM by Hibernate Tools 4.3.1
 
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
+import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -30,53 +32,55 @@ public class Usuario  implements Serializable {
      private String nombre;
      @Column(name="direccion")
      private String direccion;
-     @Column(name="fechaNacimiendo")
-     private Date fechaNacimiendo;
+     @Column(name="fechaNacimiento")
+     private Date fechaNacimiento;
+     @GeneratedValue
      @Column(name="activo")
      private boolean activo;
      @Column(name="numero")
      private int numero;
+     @GeneratedValue
      @Column(name="calificacion")
      private double calificacion;
      @Column(name="tipoUsuario")
      private String tipoUsuario;
      @Column(name="contrasena")
      private String contrasena;
-     @OneToMany(mappedBy = "rIdUsuario")
+     @OneToMany(mappedBy = "username")
      private List<Resena> resena = new ArrayList<>();
-     @OneToMany(mappedBy = "dIdUsuario")
+     @OneToMany(mappedBy = "username")
      private List<Denuncia> denuncia = new ArrayList<>();
-     @OneToMany(mappedBy = "pIdUsuario")
+     @OneToMany(mappedBy = "username")
      private List<Profesor> profesor = new ArrayList<>();
-     @OneToMany(mappedBy = "aIdUsuario")
+     @OneToMany(mappedBy = "username")
      private List<Alumno> alumno = new ArrayList<>();
-     @OneToMany(mappedBy = "tIdUsuario")
+     @OneToMany(mappedBy = "username")
      private List<Tarjeta> tarjeta = new ArrayList<>();
-     @OneToMany(mappedBy = "iIdUsuario")
+     @OneToMany(mappedBy = "username")
      private List <Interesar> interesar = new ArrayList<>();
 
     public Usuario() {
     }
 
 	
-    public Usuario(String username, String correo, String nombre, String direccion, Date fechaNacimiendo, boolean activo, int numero, double calificacion, String tipoUsuario, String contrasena) {
+    public Usuario(String username, String correo, String nombre, String direccion, Date fechaNacimiento, boolean activo, int numero, double calificacion, String tipoUsuario, String contrasena) {
         this.username = username;
         this.correo = correo;
         this.nombre = nombre;
         this.direccion = direccion;
-        this.fechaNacimiendo = fechaNacimiendo;
+        this.fechaNacimiento = fechaNacimiento;
         this.activo = activo;
         this.numero = numero;
         this.calificacion = calificacion;
         this.tipoUsuario = tipoUsuario;
         this.contrasena = contrasena;
     }
-    public Usuario(String username, String correo, String nombre, String direccion, Date fechaNacimiendo, boolean activo, int numero, double calificacion, String tipoUsuario, String contrasena, List<Resena> resena, List<Denuncia> denuncia, List<Profesor> profesor, List<Alumno> alumno, List<Tarjeta> tarjeta, List<Interesar> interesar) {
+    public Usuario(String username, String correo, String nombre, String direccion, Date fechaNacimiento, boolean activo, int numero, double calificacion, String tipoUsuario, String contrasena, List<Resena> resena, List<Denuncia> denuncia, List<Profesor> profesor, List<Alumno> alumno, List<Tarjeta> tarjeta, List<Interesar> interesar) {
        this.username = username;
        this.correo = correo;
        this.nombre = nombre;
        this.direccion = direccion;
-       this.fechaNacimiendo = fechaNacimiendo;
+       this.fechaNacimiento = fechaNacimiento;
        this.activo = activo;
        this.numero = numero;
        this.calificacion = calificacion;
@@ -118,12 +122,12 @@ public class Usuario  implements Serializable {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    public Date getFechaNacimiendo() {
-        return this.fechaNacimiendo;
+    public Date getFechaNacimiento() {
+        return this.fechaNacimiento;
     }
     
-    public void setFechaNacimiendo(Date fechaNacimiendo) {
-        this.fechaNacimiendo = fechaNacimiendo;
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
     public boolean isActivo() {
         return this.activo;

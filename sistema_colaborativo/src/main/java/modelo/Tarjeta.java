@@ -8,7 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -18,12 +21,12 @@ import javax.persistence.ManyToOne;
 @Table(name = "Tarjeta")
 public class Tarjeta  implements Serializable {
 
-    @Id
+    @Id@GeneratedValue(strategy =GenerationType.IDENTITY )
     @Column(name = "idTarjeta")
-     private int idTarjeta;
-    @Column(name = "tIdUsuario")     
+     private int idTarjeta;     
     @ManyToOne(fetch = FetchType.LAZY)
-     private Usuario tIdUsuario;
+    @JoinColumn(name = "username")
+     private Usuario username;
     @Column(name = "ccv")     
      private int ccv;
     @Column(name = "numero")     
@@ -34,9 +37,9 @@ public class Tarjeta  implements Serializable {
     public Tarjeta() {
     }
 
-    public Tarjeta(int idTarjeta, Usuario tIdUsuario, int ccv, int numero, Date vencimiento) {
+    public Tarjeta(int idTarjeta, Usuario username, int ccv, int numero, Date vencimiento) {
        this.idTarjeta = idTarjeta;
-       this.tIdUsuario = tIdUsuario;
+       this.username = username;
        this.ccv = ccv;
        this.numero = numero;
        this.vencimiento = vencimiento;
@@ -50,11 +53,11 @@ public class Tarjeta  implements Serializable {
         this.idTarjeta = idTarjeta;
     }
     public Usuario getUsuario() {
-        return this.tIdUsuario;
+        return this.username;
     }
     
-    public void setUsuario(Usuario tIdUsuario) {
-        this.tIdUsuario = tIdUsuario;
+    public void setUsuario(Usuario username) {
+        this.username = username;
     }
     public int getCcv() {
         return this.ccv;

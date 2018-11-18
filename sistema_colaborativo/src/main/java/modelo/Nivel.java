@@ -8,6 +8,8 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -17,14 +19,14 @@ import javax.persistence.Id;
 @Table(name = "Nivel")
 public class Nivel  implements Serializable {
 
-    @Id
+    @Id@GeneratedValue(strategy =GenerationType.IDENTITY )
     @Column(name = "idNivel")
      private int idNivel;
     @Column(name = "nivel")
      private String nivel;
-    @OneToMany(mappedBy = "iIdNivel")
+    @OneToMany(mappedBy = "idNivel")
      private List<Interesar> interesar = new ArrayList<>();
-    @OneToMany(mappedBy = "mIdNivel")
+    @OneToMany(mappedBy = "idNivel")
      private List<Materia> materia  = new ArrayList<>();
 
     public Nivel() {

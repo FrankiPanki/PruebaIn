@@ -11,28 +11,31 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name = "Denuncia")
 public class Denuncia  implements Serializable {
 
-    @Id
+    @Id@GeneratedValue(strategy =GenerationType.IDENTITY )
     @Column(name = "idDenuncia")
      private int idDenuncia;
-    @Column(name = "dIdUsuario")
     @ManyToOne(fetch = FetchType.LAZY)
-     private Usuario dIdUsuario;
+    @JoinColumn(name = "username")
+     private Usuario username;
     @Column(name = "motivo")     
      private String motivo;
 
     public Denuncia() {
     }
 
-    public Denuncia(int idDenuncia, Usuario dIdUsuario, String motivo) {
+    public Denuncia(int idDenuncia, Usuario username, String motivo) {
        this.idDenuncia = idDenuncia;
-       this.dIdUsuario = dIdUsuario;
+       this.username = username;
        this.motivo = motivo;
     }
    
@@ -44,11 +47,11 @@ public class Denuncia  implements Serializable {
         this.idDenuncia = idDenuncia;
     }
     public Usuario getUsuario() {
-        return this.dIdUsuario;
+        return this.username;
     }
     
-    public void setUsuario(Usuario dIdUsuario) {
-        this.dIdUsuario = dIdUsuario;
+    public void setUsuario(Usuario username) {
+        this.username = username;
     }
     public String getMotivo() {
         return this.motivo;

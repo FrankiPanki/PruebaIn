@@ -9,7 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -19,31 +22,31 @@ import javax.persistence.ManyToOne;
 @Table(name = "Materia")
 public class Materia  implements Serializable {
 
-    @Id
+    @Id@GeneratedValue(strategy =GenerationType.IDENTITY )
     @Column(name = "idMateria")
-     private int idMateria;
-    @Column(name = "mIdNivel")     
+     private int idMateria;     
     @ManyToOne(fetch = FetchType.LAZY)
-     private Nivel mIdNivel;
+    @JoinColumn(name = "idNivel")
+     private Nivel idNivel;
     @Column(name = "materia")     
      private String materia;
-    @OneToMany(mappedBy = "iIdMateria")
+    @OneToMany(mappedBy = "idMateria")
      private List<Interesar> interesar =new ArrayList<>();
-    @OneToMany(mappedBy = "tIdMateria")    
+    @OneToMany(mappedBy = "idMateria")    
      private List<Tema> tema =new ArrayList<>();
 
     public Materia() {
     }
 
 	
-    public Materia(int idMateria, Nivel mIdNivel, String materia) {
+    public Materia(int idMateria, Nivel idNivel, String materia) {
         this.idMateria = idMateria;
-        this.mIdNivel = mIdNivel;
+        this.idNivel = idNivel;
         this.materia = materia;
     }
-    public Materia(int idMateria, Nivel mIdNivel, String materia, List<Interesar> interesar, List<Tema> tema) {
+    public Materia(int idMateria, Nivel idNivel, String materia, List<Interesar> interesar, List<Tema> tema) {
        this.idMateria = idMateria;
-       this.mIdNivel = mIdNivel;
+       this.idNivel = idNivel;
        this.materia = materia;
        this.interesar = interesar;
        this.tema = tema;
@@ -57,11 +60,11 @@ public class Materia  implements Serializable {
         this.idMateria = idMateria;
     }
     public Nivel getNivel() {
-        return this.mIdNivel;
+        return this.idNivel;
     }
     
-    public void setNivel(Nivel mIdNivel) {
-        this.mIdNivel = mIdNivel;
+    public void setNivel(Nivel idNivel) {
+        this.idNivel = idNivel;
     }
     public String getMateria() {
         return this.materia;

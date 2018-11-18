@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -15,31 +18,31 @@ import javax.persistence.ManyToOne;
 @Table(name = "Interesar")
 public class Interesar  implements Serializable {
 
-    @Id
+    @Id@GeneratedValue(strategy =GenerationType.IDENTITY )
     @Column(name = "idInteresar")
      private int idInteresar;
-    @Column(name = "iIdmateria")
     @ManyToOne(fetch = FetchType.LAZY)
-     private Materia iIdmateria;
-    @Column(name = "iIdNivel")
+    @JoinColumn(name = "idMateria")
+     private Materia idMateria;
     @ManyToOne(fetch = FetchType.LAZY)
-     private Nivel iIdNivel;
-    @Column(name = "iIdTema")
+    @JoinColumn(name = "idNivel")
+     private Nivel idNivel;
     @ManyToOne(fetch = FetchType.LAZY)
-     private Tema iIdTema;
-    @Column(name = "iIdUsuario")
+    @JoinColumn(name = "idTema")
+     private Tema idTema;
     @ManyToOne(fetch = FetchType.LAZY)
-     private Usuario iIdUsuario;
+    @JoinColumn(name = "username")
+     private Usuario username;
 
     public Interesar() {
     }
 
-    public Interesar(int idInteresar, Materia iIdmateria, Nivel iIdNivel, Tema iIdTema, Usuario iIdUsuario) {
+    public Interesar(int idInteresar, Materia idMateria, Nivel idNivel, Tema idTema, Usuario username) {
        this.idInteresar = idInteresar;
-       this.iIdmateria = iIdmateria;
-       this.iIdNivel = iIdNivel;
-       this.iIdTema = iIdTema;
-       this.iIdUsuario = iIdUsuario;
+       this.idMateria = idMateria;
+       this.idNivel = idNivel;
+       this.idTema = idTema;
+       this.username = username;
     }
    
     public int getIdinteresar() {
@@ -50,32 +53,32 @@ public class Interesar  implements Serializable {
         this.idInteresar = idInteresar;
     }
     public Materia getMateria() {
-        return this.iIdmateria;
+        return this.idMateria;
     }
     
-    public void setMateria(Materia iIdmateria) {
-        this.iIdmateria = iIdmateria;
+    public void setMateria(Materia idMateria) {
+        this.idMateria = idMateria;
     }
     public Nivel getNivel() {
-        return this.iIdNivel;
+        return this.idNivel;
     }
     
-    public void setNivel(Nivel iIdNivel) {
-        this.iIdNivel = iIdNivel;
+    public void setNivel(Nivel idNivel) {
+        this.idNivel = idNivel;
     }
     public Tema getTema() {
-        return this.iIdTema;
+        return this.idTema;
     }
     
-    public void setTema(Tema iIdTema) {
-        this.iIdTema = iIdTema;
+    public void setTema(Tema idTema) {
+        this.idTema = idTema;
     }
     public Usuario getUsuario() {
-        return this.iIdUsuario;
+        return this.username;
     }
     
-    public void setUsuario(Usuario iIdUsuario) {
-        this.iIdUsuario = iIdUsuario;
+    public void setUsuario(Usuario username) {
+        this.username = username;
     }
 
 

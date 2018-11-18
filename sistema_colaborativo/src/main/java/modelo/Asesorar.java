@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -17,31 +20,31 @@ import javax.persistence.ManyToOne;
 @Table(name = "Asesorar")
 public class Asesorar  implements Serializable {
 
-    @Id
+    @Id@GeneratedValue(strategy =GenerationType.IDENTITY )
     @Column(name = "idAsesorar")
      private int idAsesorar;
-    @Column(name = "aIdAlumno")
     @ManyToOne(fetch = FetchType.LAZY)
-     private Alumno aIdAlumno;
-    @Column(name = "aIdHorario")
+    @JoinColumn(name = "idAlumno")
+     private Alumno idAlumno;
     @ManyToOne(fetch = FetchType.LAZY)
-     private Horario aIdHorario;
-    @Column(name = "aIdProfesor")
+    @JoinColumn(name = "idHorario")
+     private Horario idHorario;
     @ManyToOne(fetch = FetchType.LAZY)
-     private Profesor aIdProfesor;
-    @Column(name = "aIdTema")     
+    @JoinColumn(name = "idProfesor")
+     private Profesor idProfesor;   
     @ManyToOne(fetch = FetchType.LAZY)
-     private Tema aIdTema;
+    @JoinColumn(name = "idTema")
+     private Tema idTema;
 
     public Asesorar() {
     }
 
-    public Asesorar(int idAsesorar, Alumno aIdAlumno, Horario aIdHorario, Profesor aIdProfesor, Tema aIdTema) {
+    public Asesorar(int idAsesorar, Alumno idAlumno, Horario idHorario, Profesor idProfesor, Tema idTema) {
        this.idAsesorar = idAsesorar;
-       this.aIdAlumno = aIdAlumno;
-       this.aIdHorario = aIdHorario;
-       this.aIdProfesor = aIdProfesor;
-       this.aIdTema = aIdTema;
+       this.idAlumno = idAlumno;
+       this.idHorario = idHorario;
+       this.idProfesor = idProfesor;
+       this.idTema = idTema;
     }
    
     public int getAsesorar() {
@@ -52,32 +55,32 @@ public class Asesorar  implements Serializable {
         this.idAsesorar = idAsesorar;
     }
     public Alumno getAlumno() {
-        return this.aIdAlumno;
+        return this.idAlumno;
     }
     
-    public void setAlumno(Alumno aIdAlumno) {
-        this.aIdAlumno = aIdAlumno;
+    public void setAlumno(Alumno idAlumno) {
+        this.idAlumno = idAlumno;
     }
     public Horario getHorario() {
-        return this.aIdHorario;
+        return this.idHorario;
     }
     
-    public void setHorario(Horario aIdHorario) {
-        this.aIdHorario = aIdHorario;
+    public void setHorario(Horario idHorario) {
+        this.idHorario = idHorario;
     }
     public Profesor getProfesor() {
-        return this.aIdProfesor;
+        return this.idProfesor;
     }
     
-    public void setProfesor(Profesor aIdProfesor) {
-        this.aIdProfesor = aIdProfesor;
+    public void setProfesor(Profesor idProfesor) {
+        this.idProfesor = idProfesor;
     }
     public Tema getTema() {
-        return this.aIdTema;
+        return this.idTema;
     }
     
-    public void setTema(Tema aIdTema) {
-        this.aIdTema = aIdTema;
+    public void setTema(Tema idTema) {
+        this.idTema = idTema;
     }
 
 

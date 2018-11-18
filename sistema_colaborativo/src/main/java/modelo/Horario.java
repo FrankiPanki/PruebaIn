@@ -4,13 +4,16 @@ package modelo;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
+import java.sql.Time;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -20,38 +23,38 @@ import javax.persistence.ManyToOne;
 @Table(name = "Horario")
 public class Horario  implements Serializable {
 
-    @Id
+    @Id@GeneratedValue(strategy =GenerationType.IDENTITY )
     @Column(name = "idHorario")
      private int idHorario;
-    @Column(name = "hIdProfesor")     
     @ManyToOne(fetch = FetchType.LAZY)
-     private Profesor hIdprofesor;
+    @JoinColumn(name = "idProfesor")        
+     private Profesor idProfesor;
     @Column(name = "dia")     
      private String dia;
     @Column(name = "horaInicio")     
-     private Date horaInicio;
+     private Time horaInicio;
     @Column(name = "horaFin")     
-     private Date horaFin;
+     private Time horaFin;
     @Column(name = "disponible")     
      private Boolean disponible;
-    @OneToMany(mappedBy = "aIdHorario")
+    @OneToMany(mappedBy = "idHorario")
      private List<Asesorar> asesorar = new ArrayList<>();
 
     public Horario() {
     }
 
 	
-    public Horario(int idHorario, Profesor hIdprofesor, String dia, Date horaInicio, Date horaFin, Boolean disponible) {
+    public Horario(int idHorario, Profesor idProfesor, String dia, Time horaInicio, Time horaFin, Boolean disponible) {
         this.idHorario = idHorario;
-        this.hIdprofesor = hIdprofesor;
+        this.idProfesor = idProfesor;
         this.dia = dia;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.disponible = disponible;
     }
-    public Horario(int idHorario, Profesor hIdprofesor, String dia, Date horaInicio, Date horaFin, Boolean disponible, List<Asesorar> asesorar) {
+    public Horario(int idHorario, Profesor idProfesor, String dia, Time horaInicio, Time horaFin, Boolean disponible, List<Asesorar> asesorar) {
        this.idHorario = idHorario;
-       this.hIdprofesor = hIdprofesor;
+       this.idProfesor = idProfesor;
        this.dia = dia;
        this.horaInicio = horaInicio;
        this.horaFin = horaFin;
@@ -67,11 +70,11 @@ public class Horario  implements Serializable {
         this.idHorario = idHorario;
     }
     public Profesor getProfesor() {
-        return this.hIdprofesor;
+        return this.idProfesor;
     }
     
-    public void setProfesor(Profesor hIdprofesor) {
-        this.hIdprofesor = hIdprofesor;
+    public void setProfesor(Profesor idProfesor) {
+        this.idProfesor = idProfesor;
     }
     public String getDia() {
         return this.dia;
@@ -80,18 +83,18 @@ public class Horario  implements Serializable {
     public void setDia(String dia) {
         this.dia = dia;
     }
-    public Date getHoraInicio() {
+    public Time getHoraInicio() {
         return this.horaInicio;
     }
     
-    public void setHoraInicio(Date horaInicio) {
+    public void setHoraInicio(Time horaInicio) {
         this.horaInicio = horaInicio;
     }
-    public Date getHoraFin() {
+    public Time getHoraFin() {
         return this.horaFin;
     }
     
-    public void setHoraFin(Date horaFin) {
+    public void setHoraFin(Time horaFin) {
         this.horaFin = horaFin;
     }
     public Boolean getDisponible() {

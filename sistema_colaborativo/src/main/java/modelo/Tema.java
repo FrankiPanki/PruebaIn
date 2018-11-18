@@ -10,7 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -20,31 +23,31 @@ import javax.persistence.ManyToOne;
 @Table(name = "Tema")
 public class Tema  implements Serializable {
 
-    @Id
+    @Id@GeneratedValue(strategy =GenerationType.IDENTITY )
     @Column(name = "idTema")
-     private int idTema;
-    @Column(name = "tIdmateria")     
+     private int idTema;     
     @ManyToOne(fetch = FetchType.LAZY)
-     private Materia tIdmateria;
+    @JoinColumn(name = "idMateria")
+     private Materia idMateria;
     @Column(name = "tema")     
      private String tema;
-    @OneToMany(mappedBy = "iIdTema")
+    @OneToMany(mappedBy = "idTema")
      private List<Interesar> interesar = new ArrayList<>();
-    @OneToMany(mappedBy = "aIdTema")
+    @OneToMany(mappedBy = "idTema")
      private List<Asesorar> asesorar = new ArrayList<>();
 
     public Tema() {
     }
 
 	
-    public Tema(int idTema, Materia tIdmateria, String tema) {
+    public Tema(int idTema, Materia idMateria, String tema) {
         this.idTema = idTema;
-        this.tIdmateria = tIdmateria;
+        this.idMateria = idMateria;
         this.tema = tema;
     }
-    public Tema(int idTema, Materia tIdmateria, String tema, List<Interesar> interesar, List<Asesorar> asesorar) {
+    public Tema(int idTema, Materia idMateria, String tema, List<Interesar> interesar, List<Asesorar> asesorar) {
        this.idTema = idTema;
-       this.tIdmateria = tIdmateria;
+       this.idMateria = idMateria;
        this.tema = tema;
        this.interesar = interesar;
        this.asesorar = asesorar;
@@ -58,11 +61,11 @@ public class Tema  implements Serializable {
         this.idTema = idTema;
     }
     public Materia getMateria() {
-        return this.tIdmateria;
+        return this.idMateria;
     }
     
-    public void setMateria(Materia tIdmateria) {
-        this.tIdmateria = tIdmateria;
+    public void setMateria(Materia idMateria) {
+        this.idMateria = idMateria;
     }
     public String getTema() {
         return this.tema;

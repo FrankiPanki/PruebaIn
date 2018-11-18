@@ -8,7 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -21,26 +24,26 @@ import javax.persistence.OneToMany;
 public class Alumno  implements Serializable {
 
 
-    @Id
+    @Id@GeneratedValue(strategy =GenerationType.IDENTITY )
     @Column(name = "idAlumno")
      private int idAlumno;
-    @Column(name = "aIdUsuario")
     @ManyToOne(fetch = FetchType.LAZY)
-     private Usuario aIdUsuario;
-    @OneToMany(mappedBy = "aIdAlumno")
+    @JoinColumn(name = "username")
+     private Usuario username;
+    @OneToMany(mappedBy = "idAlumno")
      private List<Asesorar> asesorar = new ArrayList<>();
 
     public Alumno() {
     }
 
 	
-    public Alumno(int idAlumno, Usuario aIdUsuario) {
+    public Alumno(int idAlumno, Usuario username) {
         this.idAlumno = idAlumno;
-        this.aIdUsuario = aIdUsuario;
+        this.username = username;
     }
-    public Alumno(int idAlumno, Usuario aIdUsuario, List<Asesorar> asesorar) {
+    public Alumno(int idAlumno, Usuario username, List<Asesorar> asesorar) {
        this.idAlumno = idAlumno;
-       this.aIdUsuario = aIdUsuario;
+       this.username = username;
        this.asesorar = asesorar;
     }
    
@@ -52,11 +55,11 @@ public class Alumno  implements Serializable {
         this.idAlumno = idAlumno;
     }
     public Usuario getUsuario() {
-        return this.aIdUsuario;
+        return this.username;
     }
     
-    public void setUsuario(Usuario aIdUsuario) {
-        this.aIdUsuario = aIdUsuario;
+    public void setUsuario(Usuario username) {
+        this.username = username;
     }
     public List<Asesorar> getAsesorar() {
         return this.asesorar;
